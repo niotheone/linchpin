@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뮤아이 블로그 마케팅 제안서</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #4F46E5, #EC4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: #EC4899;
+            margin-top: 12px;
+            border-radius: 2px;
+        }
+        .kpi-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .kpi-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .pricing-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .pricing-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .recommended-badge {
+            transform: rotate(45deg);
+        }
+        .bar {
+            transition: width 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <!-- Header -->
+        <header class="text-center py-12 md:py-20 border-b border-gray-700">
+            <h1 class="text-4xl md:text-6xl font-black gradient-text mb-4">뮤아이 BLOG</h1>
+            <h2 class="text-2xl md:text-4xl font-bold text-white mb-6">성장을 위한 블로그 마케팅 제안서</h2>
+            <p class="text-lg text-gray-300 max-w-2xl mx-auto">가격은 가볍게, 콘텐츠는 핫하게, 육성은 빠르게! 귀사의 브랜드 자산을 만들어 드립니다.</p>
+        </header>
+
+        <main class="py-12">
+            <!-- Section 1: Market Analysis -->
+            <section class="mb-20">
+                <h3 class="text-3xl font-bold text-center mb-12 section-title mx-auto">우리가 공략할 시장</h3>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+                        <h4 class="text-xl font-bold mb-4 text-pink-400">주요 타겟 키워드 (월간 검색량)</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <!-- Changed text color to red-500 for #청담미용실 -->
+                            <li class="flex justify-between"><span class="text-red-500">#청담미용실</span> <span class="font-bold text-white">4,480+</span></li>
+                            <!-- Changed text color to red-500 for #청담동미용실 -->
+                            <li class="flex justify-between"><span class="text-red-500">#청담동미용실</span> <span class="font-bold text-white">3,850+</span></li>
+                            <li class="flex justify-between"><span>#퍼스널컬러진단</span> <span class="font-bold text-white">55,220+</span></li>
+                            <li class="flex justify-between"><span>#퍼스널컬러</span> <span class="font-bold text-white">43,500+</span></li>
+                            <li class="flex justify-between"><span>#다운펌</span> <span class="font-bold text-white">29,400+</span></li>
+                            <li class="flex justify-between"><span>#두피관리</span> <span class="font-bold text-white">5,280+</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+                        <h4 class="text-xl font-bold mb-4 text-pink-400">핵심 타겟: 20-30대 여성</h4>
+                        <div class="flex items-center justify-center space-x-8">
+                            <div class="text-center">
+                                <div class="relative w-32 h-32">
+                                    <svg class="w-full h-full" viewBox="0 0 36 36">
+                                        <path class="text-gray-700" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3"></path>
+                                        <path class="text-pink-500" stroke-dasharray="62.4, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3" stroke-linecap="round"></path>
+                                    </svg>
+                                    <div class="absolute inset-0 flex items-center justify-center text-2xl font-bold">62%</div>
+                                </div>
+                                <p class="mt-2 font-bold">여성</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="relative w-32 h-32">
+                                    <svg class="w-full h-full" viewBox="0 0 36 36">
+                                        <path class="text-gray-700" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3"></path>
+                                        <path class="text-indigo-500" stroke-dasharray="37.6, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3" stroke-linecap="round"></path>
+                                    </svg>
+                                    <div class="absolute inset-0 flex items-center justify-center text-2xl font-bold">38%</div>
+                                </div>
+                                <p class="mt-2 font-bold">남성</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Current Situation -->
+            <section class="mb-20 text-center">
+                <h3 class="text-3xl font-bold mb-4 section-title mx-auto">현재, 우리 블로그는?</h3>
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">계정의 잠재력은 충분하지만, 활성화되지 않아 기회를 놓치고 있습니다.</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="kpi-card p-6 rounded-2xl text-center">
+                        <p class="text-5xl font-black text-red-500 mb-2">164만+</p>
+                        <h4 class="text-lg font-bold text-gray-300">전체 블로그 순위</h4>
+                    </div>
+                    <div class="kpi-card p-6 rounded-2xl text-center">
+                        <p class="text-5xl font-black text-yellow-500 mb-2">0<span class="text-2xl">회</span></p>
+                        <h4 class="text-lg font-bold text-gray-300">최근 7일 발행량</h4>
+                    </div>
+                    <div class="kpi-card p-6 rounded-2xl text-center">
+                        <p class="text-5xl font-black text-green-500 mb-2">C</p>
+                        <h4 class="text-lg font-bold text-gray-300">블로그 등급</h4>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2.5: Competitor Analysis -->
+            <section class="mb-20">
+                <h3 class="text-3xl font-bold text-center mb-12 section-title mx-auto">경쟁 블로그 비교 분석</h3>
+                <div class="bg-gray-800 p-8 rounded-2xl shadow-lg">
+                    <div class="space-y-6">
+                        <!-- Competitor 1 -->
+                        <div class="grid grid-cols-4 gap-4 items-center">
+                            <h4 class="font-bold text-lg text-gray-300 col-span-1">블로그 木</h4>
+                            <div class="col-span-3">
+                                <div class="flex items-center mb-1">
+                                    <span class="w-24 text-sm text-gray-400">방문자 (5일)</span>
+                                    <div class="w-full bg-gray-700 rounded-full h-5">
+                                        <div class="bar bg-pink-500 h-5 rounded-full" style="width: 90%;"></div>
+                                    </div>
+                                    <span class="ml-2 font-semibold">4,869</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-24 text-sm text-gray-400">등급</span>
+                                    <div class="w-full bg-gray-700 rounded-full h-5">
+                                        <div class="bar bg-pink-400 h-5 rounded-full" style="width: 100%;"></div>
+                                    </div>
+                                    <span class="ml-2 font-semibold">S+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Competitor 2 -->
+                        <div class="grid grid-cols-4 gap-4 items-center">
+                            <h4 class="font-bold text-lg text-gray-300 col-span-1">FCMC패션연구소</h4>
+                            <div class="col-span-3">
+                                <div class="flex items-center mb-1">
+                                    <span class="w-24 text-sm text-gray-400">방문자 (5일)</span>
+                                    <div class="w-full bg-gray-700 rounded-full h-5">
+                                        <div class="bar bg-pink-500 h-5 rounded-full" style="width: 60%;"></div>
+                                    </div>
+                                    <span class="ml-2 font-semibold">3,151</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-24 text-sm text-gray-400">등급</span>
+                                    <div class="w-full bg-gray-700 rounded-full h-5">
+                                        <div class="bar bg-pink-400 h-5 rounded-full" style="width: 95%;"></div>
+                                    </div>
+                                    <span class="ml-2 font-semibold">S</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- MUU AI -->
+                        <div class="grid grid-cols-4 gap-4 items-center border-t-2 border-dashed border-gray-600 pt-6 mt-6">
+                            <h4 class="font-bold text-lg text-indigo-400 col-span-1">뮤아이 (현재)</h4>
+                            <div class="col-span-3">
+                                <div class="flex items-center mb-1">
+                                    <span class="w-24 text-sm text-gray-400">방문자 (5일)</span>
+                                    <div class="w-full bg-gray-700 rounded-full h-5">
+                                        <div class="bar bg-indigo-500 h-5 rounded-full" style="width: 1%;"></div>
+                                    </div>
+                                    <span class="ml-2 font-semibold">23</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="w-24 text-sm text-gray-400">등급</span>
+                                    <div class="w-full bg-gray-700 rounded-full h-5">
+                                        <div class="bar bg-indigo-400 h-5 rounded-full" style="width: 30%;"></div>
+                                    </div>
+                                    <span class="ml-2 font-semibold">C</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center mt-8 text-yellow-400 font-semibold">격차는 크지만, 저희의 전략과 함께라면 빠르게 따라잡고 추월할 수 있습니다.</p>
+                </div>
+            </section>
+
+            <!-- Section 3: Our Solution -->
+            <section class="mb-20 bg-gray-800 p-8 rounded-3xl shadow-2xl">
+                <h3 class="text-3xl font-bold text-center mb-12 section-title mx-auto">성장을 위한 맞춤 전략</h3>
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div class="p-6">
+                        <div class="flex items-center justify-center mb-4 w-16 h-16 mx-auto bg-indigo-600 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M239.62,193.37a24,24,0,0,0-33.94,0L16,332.59,66.05,282.54a24,24,0,0,0,0-33.94l-42.42-42.43a24,24,0,0,0-33.94,0L16,232.59,193.37,55.22a24,24,0,0,0,0-33.94l42.43-42.42a24,24,0,0,0,0,33.94L83.31,165.3,136,217.95l103.62-103.62a24,24,0,0,0,0-33.94Z" opacity="0.2"></path><path d="M235.74,21.52a32,32,0,0,0-45.26,0L40.26,171.74a8,8,0,0,0,0,11.32L92.8,235.6a8,8,0,0,0,11.32,0L254.34,85.38a32,32,0,0,0,0-45.26ZM192,96a16,16,0,1,1,16,16A16,16,0,0,1,192,96Zm-85.2,128.49L54.26,172,160,66.26l52.49,52.48Z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">USP 강화 콘텐츠</h4>
+                        <p class="text-gray-400">'퍼스널 컬러 진단'이라는 독보적 강점을 활용, 고객의 궁금증을 해결하는 정보성+후기 콘텐츠 제작</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-center mb-4 w-16 h-16 mx-auto bg-indigo-600 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM96,176a16,16,0,1,1,16-16A16,16,0,0,1,96,176Zm0-64a16,16,0,1,1,16-16A16,16,0,0,1,96,112Zm64,64a16,16,0,1,1,16-16A16,16,0,0,1,160,176Z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">체계적인 포스팅</h4>
+                        <p class="text-gray-400">주 3회 발행 (정보성 1회 + 홍보성 2회)으로 블로그 지수를 꾸준히 상승시키고 잠재 고객 유입 극대화</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-center mb-4 w-16 h-16 mx-auto bg-indigo-600 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M234.33,114.33l-40-40a8,8,0,0,0-11.32,11.32L212.69,116H40a8,8,0,0,0,0,16H212.69l-29.68,29.69a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,234.33,114.33ZM48,88a8,8,0,0,0,8-8V40a8,8,0,0,0-16,0V80A8,8,0,0,0,48,88ZM48,168a8,8,0,0,0-8,8v40a8,8,0,0,0,16,0V176A8,8,0,0,0,48,168Z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">적극적인 이웃 관리</h4>
+                        <p class="text-gray-400">타겟 고객층과 활발히 소통하여 구독자를 늘리고, '찐팬'을 확보하여 브랜드 충성도 강화</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Pricing -->
+            <section class="mb-12">
+                <h3 class="text-3xl font-bold text-center mb-12 section-title mx-auto">서비스 및 가격</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Basic Card -->
+                    <div class="pricing-card bg-gray-800 p-6 rounded-2xl border-2 border-gray-700 flex flex-col">
+                        <h4 class="text-xl font-bold">BASIC</h4>
+                        <p class="text-4xl font-black my-4">69<span class="text-lg font-medium">만원/월</span></p>
+                        <ul class="space-y-2 text-gray-300 flex-grow">
+                            <li>✓ 월 4건 포스팅</li>
+                            <li>✓ 매일 이웃/구독 관리</li>
+                            <li>✓ 기본 브랜딩 노출</li>
+                        </ul>
+                        <button class="mt-6 w-full bg-gray-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600">문의하기</button>
+                    </div>
+                    
+                    <!-- Grow Card -->
+                    <div class="pricing-card bg-gray-800 p-6 rounded-2xl border-2 border-gray-700 flex flex-col">
+                        <h4 class="text-xl font-bold">GROW</h4>
+                        <p class="text-4xl font-black my-4">99<span class="text-lg font-medium">만원/월</span></p>
+                        <ul class="space-y-2 text-gray-300 flex-grow">
+                            <li>✓ 월 8건 포스팅</li>
+                            <li>✓ 매일 이웃/구독 관리</li>
+                            <li>✓ 블로그 육성 및 노출 강화</li>
+                        </ul>
+                        <button class="mt-6 w-full bg-gray-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600">문의하기</button>
+                    </div>
+
+                    <!-- Impact Card (Recommended) -->
+                    <div class="pricing-card relative bg-indigo-600 p-6 rounded-2xl border-2 border-pink-500 flex flex-col shadow-2xl shadow-indigo-500/50">
+                        <div class="absolute top-0 right-0 overflow-hidden w-24 h-24">
+                            <div class="recommended-badge absolute top-6 -right-6 bg-pink-500 text-white text-xs font-bold py-1 px-8">강력 추천</div>
+                        </div>
+                        <h4 class="text-xl font-bold">IMPACT</h4>
+                        <p class="text-4xl font-black my-4">
+                            <span class="text-2xl line-through text-gray-300 mr-2">129</span>99<span class="text-lg font-medium">만원/월</span>
+                        </p>
+                        <ul class="space-y-2 flex-grow">
+                            <li>✓ 월 12건 포스팅</li>
+                            <li>✓ 매일 이웃/구독 관리</li>
+                            <li>✓ 주요 키워드 노출 집중</li>
+                        </ul>
+                        <button class="mt-6 w-full bg-white text-indigo-600 font-bold py-2 px-4 rounded-lg hover:bg-gray-200">선택하기</button>
+                    </div>
+                    
+                    <!-- Universe Card -->
+                    <div class="pricing-card bg-gray-800 p-6 rounded-2xl border-2 border-gray-700 flex flex-col">
+                        <h4 class="text-xl font-bold">UNIVERSE</h4>
+                        <p class="text-4xl font-black my-4">179<span class="text-lg font-medium">만원/월</span></p>
+                        <ul class="space-y-2 text-gray-300 flex-grow">
+                            <li>✓ 월 20건 포스팅</li>
+                            <li>✓ 매일 이웃/구독 관리</li>
+                            <li>✓ 가장 빠른 육성 및 노출 극대화</li>
+                        </ul>
+                        <button class="mt-6 w-full bg-gray-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600">문의하기</button>
+                    </div>
+                </div>
+                <p class="text-center mt-8 text-yellow-400 font-bold text-lg animate-pulse">✨ 특별 지인 할인! IMPACT 플랜을 월 99만원에! (홈페이지형 디자인 무료 제공)</p>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center py-10 border-t border-gray-700">
+            <h3 class="text-2xl font-bold mb-4">린치핀 마케팅</h3>
+            <p class="text-gray-400 mb-6">AI 시대, 인간의 공감력을 높여 의미있는 연결을 만듭니다.</p>
+            <div class="text-gray-300">
+                <p>담당자: 서정민 (NIO)</p>
+                <p>Email: 4u_doumi@naver.com</p>
+                <p>Phone: 010-9138-3742</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+
+
