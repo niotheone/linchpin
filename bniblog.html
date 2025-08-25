@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>린치핀 제로투원 블로그 | 인터랙티브 제안서</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Energetic Professional -->
+    <!-- Application Structure Plan: A thematic, single-page scrolling application designed to guide the user from the main value proposition to specific details. The flow starts with a hero section, moves to trust-building guarantees and special offers, then features a core interactive plan selector linked to a dynamic radar chart for visualizing growth potential. This structure is chosen over a linear document layout to make the information more engaging, allow for easy comparison, and help users understand the tangible benefits of each service plan through immediate visual feedback, enhancing usability and decision-making. -->
+    <!-- Visualization & Content Choices:
+        - Report Info: Service Plans & Pricing -> Goal: Compare & Select -> Viz/Method: Interactive buttons + Dynamic Text + Radar Chart -> Interaction: User clicks a plan button, which updates the displayed details and dynamically changes the radar chart's data to reflect that plan's focus. -> Justification: Transforms a static table into an engaging tool that visually communicates the value and expected outcomes of each plan, making abstract benefits concrete. -> Library: Chart.js for the radar chart.
+        - Report Info: 3 Guarantees -> Goal: Inform & Build Trust -> Viz/Method: Icon-based feature cards in a grid layout. -> Interaction: Subtle hover effects to draw attention. -> Justification: Breaks down key promises into easily digestible points, improving clarity and building confidence. -> Library: HTML/Tailwind.
+        - Report Info: BNI 3-Month Offer -> Goal: Show Process & Value -> Viz/Method: A 3-step horizontal timeline diagram. -> Interaction: Highlighting steps on hover. -> Justification: Clearly visualizes the onboarding journey and the value delivered over time. -> Library: HTML/Tailwind.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #F3F4F6;
+            color: #374151;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #E34A47;
+            border-bottom-color: #E34A47;
+        }
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .plan-card.recommended {
+            transform: scale(1.05);
+            border: 3px solid #E34A47;
+            position: relative;
+        }
+        .plan-card.recommended:hover {
+            transform: scale(1.08) translateY(-5px);
+        }
+        .ribbon {
+            position: absolute;
+            top: 16px;
+            right: -24px;
+            padding: 4px 24px;
+            background-color: #E34A47;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .plan-price-discount {
+            font-weight: bold;
+            color: #E34A47;
+            font-size: 2.25rem;
+        }
+        .plan-old-price {
+            text-decoration: line-through;
+            color: #9CA3AF;
+        }
+        .cta-button {
+            background-color: #E34A47;
+            color: white;
+            padding: 12px 32px;
+            border-radius: 9999px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .cta-button:hover {
+            background-color: #C53030;
+            transform: translateY(-2px);
+        }
+        .bg-gradient-header {
+            background: linear-gradient(135deg, #4B5563, #1F2937);
+        }
+        .text-gradient-title {
+            background: linear-gradient(45deg, #1E6262, #88A893);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-700">
+
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-md">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-800">
+                린치핀 제로투원 블로그(BNI 한정)
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#services" class="nav-link font-medium pb-1">핵심 혜택</a>
+                <a href="#plans" class="nav-link font-medium pb-1">성장 플랜</a>
+                <a href="#examples" class="nav-link font-medium pb-1">콘텐츠 예시</a>
+                <a href="#contact" class="nav-link font-medium pb-1">문의</a>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+        <section id="hero" class="bg-white py-20 md:py-32 text-center">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gradient-title leading-tight mb-4">
+                    가격은 가볍게, 콘텐츠는 핫하게, 육성은 빠르게!
+                </h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto text-gray-600 mb-8">
+                    중소상공인, 전문직, 스타트업을 위한 '제로투원 블로그'는 저렴한 비용으로 홈페이지 기능과 브랜드 마케팅 자산을 동시에 만들어 드립니다.
+                </p>
+                <a href="#plans" class="cta-button">
+                    나에게 맞는 플랜 찾아보기
+                </a>
+            </div>
+        </section>
+
+
+        <section id="services" class="py-16">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">3개월 안에 약속드리는 3가지 보장</h2>
+                    <p class="mt-4 text-lg text-gray-600">저희는 명확한 목표를 설정하고, 반드시 결과를 만들어냅니다.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div class="card p-8 flex flex-col items-center">
+                        <div class="text-5xl text-red-500 mb-4">📈</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">구독자 1,000명+</h3>
+                        <p class="text-gray-600">체계적인 구독 관리를 통해 3개월 내 유의미한 팬을 확보합니다.</p>
+                    </div>
+                    <div class="card p-8 flex flex-col items-center">
+                        <div class="text-5xl text-red-500 mb-4">🏆</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">판다랭크 B등급+</h3>
+                        <p class="text-gray-600">효과적인 키워드 전략으로 블로그 지수를 높여 노출을 활성화합니다.</p>
+                    </div>
+                    <div class="card p-8 flex flex-col items-center">
+                        <div class="text-5xl text-red-500 mb-4">❤️</div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">공감/댓글 30건+</h3>
+                        <p class="text-gray-600">활발한 이웃 관리를 통해 콘텐츠 반응과 참여도를 극대화합니다.</p>
+                    </div>
+                </div>
+
+
+                <div class="text-center mt-20 mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">BNI 지인 한정 3가지 무료 서비스</h2>
+                    <p class="mt-4 text-lg text-gray-600">함께 성장하는 파트너를 위해 3개월간 특별한 혜택을 추가로 제공합니다.</p>
+                </div>
+                <div class="relative max-w-4xl mx-auto">
+                    <div class="border-l-2 border-dashed border-red-300 absolute h-full top-0 left-1/2 -ml-px"></div>
+                    <div class="grid md:grid-cols-3 gap-8 text-center">
+                        <div class="p-6">
+                            <div class="bg-white text-red-500 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-2 border-red-500">1</div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">1개월차: 육성 계정 제공</h3>
+                            <p class="text-gray-600">바로 노출이 시작할 수 있도록 준최적 4단계 아이디의 소유권을 이전해 드립니다.</p>
+                        </div>
+                        <div class="p-6">
+                            <div class="bg-white text-red-500 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-2 border-red-500">2</div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">2개월차: 창업 스토리 작성</h3>
+                            <p class="text-gray-600">대표님의 진솔한 이야기를 담아 브랜드 블로그 공지로 등록해 드립니다.</p>
+                        </div>
+                        <div class="p-6">
+                            <div class="bg-white text-red-500 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 border-2 border-red-500">3</div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">3개월차: 홈페이지형 블로그 디자인 (링크 통합형)</h3>
+                            <p class="text-gray-600">브랜드 이미지를 효과적으로 전달하는 디자인을 무료로 제공합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="plans" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">나에게 맞는 성장 플랜 선택하기</h2>
+                    <p class="mt-4 text-lg text-gray-600">목표와 예산에 맞춰 최적의 플랜을 선택하고 블로그 성장의 변화를 직접 확인해보세요.</p>
+                </div>
+
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Plan Card - Basic -->
+                    <div class="plan-card card p-8 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">BASIC</h3>
+                            <p class="text-4xl font-extrabold text-gray-800 mb-4">69만원<span class="text-lg font-normal text-gray-500">/월</span></p>
+                            <ul class="list-none space-y-2 text-left text-gray-600">
+                                <li class="flex items-center">
+                                    <span class="text-green-500 mr-2">✓</span> 월 4건 포스팅
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-green-500 mr-2">✓</span> 매일 이웃/구독 관리
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-green-500 mr-2">✓</span> 기본 브랜딩 노출
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <!-- Plan Card - Grow -->
+                    <div class="plan-card card p-8 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">GROW</h3>
+                            <p class="text-4xl font-extrabold text-gray-800 mb-4">99만원<span class="text-lg font-normal text-gray-500">/월</span></p>
+                            <ul class="list-none space-y-2 text-left text-gray-600">
+                                <li class="flex items-center">
+                                    <span class="text-green-500 mr-2">✓</span> 월 8건 포스팅
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-green-500 mr-2">✓</span> 매일 이웃/구독 관리
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-green-500 mr-2">✓</span> 블로그 기본 육성 및 노출
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <!-- Plan Card - Impact (Recommended) -->
+                    <div class="plan-card card recommended p-8 flex flex-col justify-between">
+                        <div class="ribbon">
+                            강력 추천
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">IMPACT</h3>
+                            <p class="text-lg text-gray-400 line-through mb-1">129만원</p>
+                            <p class="plan-price-discount text-red-500 mb-4">99만원<span class="text-lg font-normal text-gray-500">/월</span></p>
+                            <ul class="list-none space-y-2 text-left text-gray-600">
+                                <li class="flex items-center">
+                                    <span class="text-green-500 mr-2">✓</span> 월 12건 포스팅
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-green-500 mr-2">✓</span> 매일 이웃/구독 관리
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-green-500 mr-2">✓</span> 주요 키워드 노출 집중
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                   
+                    <!-- Plan Card - Universe -->
+                    <div class="plan-card card p-8 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">UNIVERSE</h3>
+                            <p class="text-4xl font-extrabold text-gray-800 mb-4">179만원<span class="text-lg font-normal text-gray-500">/월</span></p>
+                            <ul class="list-none space-y-2 text-left text-gray-600">
+                                <li class="flex items-center">
+                                    <span class="text-green-500 mr-2">✓</span> 월 20건 포스팅
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-green-500 mr-2">✓</span> 매일 이웃/구독 관리
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-green-500 mr-2">✓</span> 가장 빠른 육성 및 노출 극대화
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="mt-12 p-8 bg-white rounded-lg shadow-lg text-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">최적화 블로그 추가 포스팅 제안</h3>
+                    <p class="text-lg mb-2 text-gray-600">초기 복수 노출을 위한 기존 **S급 계정 동시 노출**을 추천합니다.</p>
+                    <p class="text-lg font-bold text-red-500">💡주요 키워드 복수 노출 시 3~4배의 브랜딩 효과가 있습니다!</p>
+                    <p class="text-sm mt-4 text-gray-500">2~4건 추천 (건당 10만원)</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="examples" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">콘텐츠 예시</h2>
+                    <p class="mt-4 text-lg text-gray-600">단순 정보 전달을 넘어, 독자를 팬으로 만드는 매력적인 포스팅을 작성합니다.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Example 1 -->
+                    <div class="card p-6">
+                        <h4 class="font-bold text-lg text-gray-800 mb-2">"프로야구 선수가 고기를 고르는 법이 다를까?"</h4>
+                        <blockquote class="border-l-4 border-red-500 pl-4 italic text-gray-600">
+                            "타석에서 공을 고르듯 고기도 고른다." 15년간 프로야구 마운드를 누빈 한 선수가 은퇴 후 서초동에 정육점을 열었다는 소식이 들려왔습니다. 과연 운동선수 출신이 운영하는 정육점은 어떻게 다를까요? 직접 가서 확인해본 결과, 그의 고기 선별법에는 예상치 못한 비밀이 숨어있었습니다.
+                        </blockquote>
+                    </div>
+                    <!-- Example 2 -->
+                    <div class="card p-6">
+                        <h4 class="font-bold text-lg text-gray-800 mb-2">"한우가 4계절 내내 같은 맛일 수 있다고?"</h4>
+                        <blockquote class="border-l-4 border-red-500 pl-4 italic text-gray-600">
+                            계절이 바뀌면 한우 맛도 바뀐다는 게 정육업계의 상식이었습니다. 여름엔 질겨지고, 겨울엔 느끼해지는 것이 당연하다고 여겨졌죠. 그런데 서초동 '사계빛'은 이 상식을 완전히 뒤엎었습니다. 사계절 내내 동일한 맛과 빛깔을 유지하는 그들만의 특별한 관리 시스템, 과연 어떤 원리일까요?
+                        </blockquote>
+                    </div>
+                    <!-- Example 3 -->
+                    <div class="card p-6">
+                        <h4 class="font-bold text-lg text-gray-800 mb-2">"생일선물로 '고기케이크'를 받는다면?"</h4>
+                        <blockquote class="border-l-4 border-red-500 pl-4 italic text-gray-600">
+                            "생일 축하합니다!" 하며 나타난 건 달콤한 케이크가 아닌 특급 한우로 만든 '고기케이크'였습니다. 처음엔 당황스러웠지만, 촛불을 끄고 한 입 베어 문 순간 깨달았죠. 이게 진짜 의미 있는 생일선물이구나. 요즘 MZ세대 사이에서 화제가 되고 있는 사계빛의 고기케이크, 과연 어떤 매력이 숨어있을까요?
+                        </blockquote>
+                    </div>
+                    <!-- Example 4 -->
+                    <div class="card p-6">
+                        <h4 class="font-bold text-lg text-gray-800 mb-2">"명절 때마다 고민되는 선물, 이제 고민 끝"</h4>
+                        <blockquote class="border-l-4 border-red-500 pl-4 italic text-gray-600">
+                            또 명절이 다가옵니다. 매번 반복되는 고민, "올해는 뭘 드릴까?" 과일도 식상하고, 건강식품도 뻔하고... 그런 당신에게 완벽한 해답이 있습니다. 사계빛의 한우선물세트를 받은 어르신들의 반응은 한결같았습니다. "이런 선물은 처음이야!" 과연 어떤 특별함이 있길래 이런 반응이 나올까요?
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+          <footer id="contact" class="bg-[#4B5563] text-white">
+            <div class="container mx-auto px-6 py-12 text-center">
+                <h2 class="text-3xl font-bold mb-4">린치핀은 의미있는 연결을 만듭니다</h2>
+                <p class="max-w-2xl mx-auto mb-8">AI 시대, 린치핀 마케팅은 인간의 공감력을 높여 사람과 정보, 사람과 브랜드, 그리고 사람과 사람을 연결합니다.</p>
+                <div class="font-medium">
+                    <p>CHIEF EXECUTIVE OFFICER 서정민 (NIO)</p>
+                    <p>E. 4U_DOUMI@NAVER.COM | T. 010-9135-3742</p>
+                    <p>B. BLOG.NAVER.COM/4U_DOUMI</p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+</body>
+</html>
+
+
+
+
