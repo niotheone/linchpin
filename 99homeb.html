@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>99만원 홈페이지형 블로그 | 구구절절 옳은 선택</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flow-arrow {
+            font-size: 2rem;
+            line-height: 1;
+            color: #FFD166;
+        }
+        .kpi-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 5px solid #06D6A0;
+        }
+    </style>
+</head>
+<body class="bg-[#073B4C] text-white">
+
+    <div class="container mx-auto p-4 md:p-8">
+        
+        <header class="text-center my-12">
+            <h1 class="text-4xl md:text-6xl font-black text-[#06D6A0] drop-shadow-lg">아직도 홈페이지에 수백만 원을 쓰시나요?</h1>
+            <h2 class="text-2xl md:text-3xl mt-4 text-gray-300">구구절절 옳은 선택, <span class="text-[#FFD166] font-bold">99홈페이지형 블로그</span></h2>
+            <div class="mt-6 text-lg bg-[#FF6B6B] inline-block px-6 py-2 rounded-full font-bold shadow-xl">
+                선착순 5개 기업 한정, 파격 제안
+            </div>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <section class="md:col-span-2 bg-[#118AB2] rounded-2xl shadow-2xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-6 text-[#FFD166]">사업의 첫걸음, 두 가지 경로</h2>
+                <p class="text-center text-gray-200 mb-8 max-w-3xl mx-auto">기존 홈페이지 제작 방식은 초기 비용과 별도의 마케팅 비용이라는 두 가지 큰 허들을 넘어야 합니다. 저희는 그 과정을 하나로 합쳐 가장 효율적인 경로를 제시합니다.</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-gray-800/50 p-6 rounded-lg border-2 border-[#FF6B6B]">
+                        <h3 class="text-2xl font-bold text-[#FF6B6B] mb-4">A. 일반적인 홈페이지 제작 경로</h3>
+                        <div class="flex flex-col items-center space-y-4 text-center">
+                            <div class="p-3 bg-[#073B4C] rounded-lg w-full">💰 수백만 원의 제작 비용 발생</div>
+                            <div class="flow-arrow">▼</div>
+                            <div class="p-3 bg-[#073B4C] rounded-lg w-full">🤔 "어떻게 알리지?" 마케팅 고민 시작</div>
+                            <div class="flow-arrow">▼</div>
+                            <div class="p-3 bg-[#073B4C] rounded-lg w-full">💸 추가 광고비 지출 (불확실한 효과)</div>
+                            <div class="flow-arrow">▼</div>
+                            <div class="p-3 bg-red-900/70 rounded-lg w-full font-bold">😴 방문객 없는 유령 홈페이지</div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-800/50 p-6 rounded-lg border-2 border-[#06D6A0]">
+                        <h3 class="text-2xl font-bold text-[#06D6A0] mb-4">B. 스마트 마케팅 채널 구축 경로</h3>
+                        <div class="flex flex-col items-center space-y-4 text-center">
+                            <div class="p-3 bg-[#073B4C] rounded-lg w-full">✅ 99만 원으로 모든 준비 완료</div>
+                            <div class="flow-arrow">▼</div>
+                            <div class="p-3 bg-[#073B4C] rounded-lg w-full">🚀 즉시 키워드 노출 시작 (육성 계정)</div>
+                            <div class="flow-arrow">▼</div>
+                            <div class="p-3 bg-[#073B4C] rounded-lg w-full">📈 콘텐츠 발행 & 구독자 증가 (이웃,구독 관리)</div>
+                            <div class="flow-arrow">▼</div>
+                            <div class="p-3 bg-green-900/70 rounded-lg w-full font-bold">🔥 고객이 찾는 목좋은 곳의 마케팅 부동산</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-[#118AB2] rounded-2xl shadow-2xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-2 text-[#FFD166]">비교 불가한 비용 효율성</h2>
+                <p class="text-center text-gray-200 mb-6">단순 제작을 넘어 실제 마케팅 가치까지 포함된 비용을 비교해보세요.</p>
+                <div class="chart-container">
+                    <canvas id="costChart"></canvas>
+                </div>
+                <p class="text-center text-gray-300 mt-4 text-sm">일반 홈페이지 제작 비용은 평균적인 기획/디자인/개발 비용을 기준으로 하며, 마케팅 비용은 별도입니다.</p>
+            </section>
+
+            <section class="bg-[#118AB2] rounded-2xl shadow-2xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-2 text-[#FFD166]">"뜬구름 잡는 소리?" 아닙니다.</h2>
+                <p class="text-center text-gray-200 mb-6">저희는 구체적인 성과를 약속하고 데이터로 증명합니다. 이것이 저희가 제공하는 핵심 가치입니다.</p>
+                <div class="space-y-4">
+                    <div class="kpi-box p-4 rounded-lg">
+                        <h3 class="text-xl font-bold text-white">혜택 1. 홈페이지형 블로그 세팅</h3>
+                        <p class="text-gray-300">브랜드 신뢰도를 높이는 전문가 수준의 디자인과 기능을 제공합니다.</p>
+                    </div>
+                    <div class="kpi-box p-4 rounded-lg">
+                        <h3 class="text-xl font-bold text-white">혜택 2. 육성 계정 무료 제공</h3>
+                        <p class="text-gray-300">사업 첫날부터 잠재고객에게 노출될 기회를 잡으세요.</p>
+                    </div>
+                    <div class="kpi-box p-4 rounded-lg">
+                        <h3 class="text-xl font-bold text-white">혜택 3. 진짜 구독자 500명 확보 보장</h3>
+                        <p class="text-gray-300">초기 비즈니스의 가장 강력한 자산인 충성 고객을 확보합니다.</p>
+                    </div>
+                     <div class="kpi-box p-4 rounded-lg">
+                        <h3 class="text-xl font-bold text-white">혜택 4. 핵심 포스팅 4건 제작</h3>
+                        <p class="text-gray-300">고객의 마음을 사로잡을 콘텐츠로 온라인 존재감을 구축합니다.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-[#118AB2] rounded-2xl shadow-2xl p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-center mb-2 text-[#FFD166]">성장의 '점프 스타트'</h2>
+                    <p class="text-center text-gray-200 mb-6">신규 블로그가 겪는 지루한 성장 정체기(Death Valley) 없이, 처음부터 타겟고객이 찾는 연관키워드부터 시작하여 빠른 성장을 돕습니다.</p>
+                    <div class="chart-container">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+                 <div class="bg-[#FFD166] text-[#073B4C] rounded-2xl shadow-2xl p-6 md:p-8 flex flex-col justify-center items-center text-center border-4 border-dashed border-white transform rotate-[-2deg] hover:rotate-0 transition-transform duration-300">
+                    <h2 class="text-3xl font-black text-center mb-4">선착순 특별가</h2>
+                    <p class="text-lg font-bold mb-6 bg-[#FF6B6B] text-white inline-block px-4 py-1 rounded-full shadow-lg">-60% 이상 할인-</p>
+
+                    <p class="text-center mb-6 font-medium">
+                        이 모든 혜택이 포함된 250만원 상당의 패키지를<br>단 5개 기업에게만 제공합니다.
+                    </p>
+                    
+                    <div class="bg-white/60 rounded-lg p-6 my-4 w-full">
+                        <p class="text-xl text-gray-600 line-through">정가 2,500,000원</p>
+                        <p class="text-4xl sm:text-5xl md:text-6xl font-black text-[#073B4C] my-2 drop-shadow-lg">990,000원</p>
+                    </div>
+
+                     <p class="mt-6 text-sm text-[#073B4C]/80 font-semibold">
+                        홈페이지 제작, 마케팅, 초기 고객 확보까지<br>한 번에 해결되는 올인원 솔루션!
+                     </p>
+                </div>
+            </section>
+
+            <section class="md:col-span-2 bg-[#118AB2] rounded-2xl shadow-2xl p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-6 text-[#FFD166]">홈페이지형 블로그 포트폴리오</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <a href="https://blog.naver.com/commitmentkkzr" target="_blank" class="block group">
+                        <div class="h-48 flex items-center justify-center p-4 text-center bg-[#06D6A0] rounded-lg shadow-lg transform group-hover:scale-105 transition-transform duration-300">
+                            <h3 class="text-xl font-bold text-[#073B4C]">슬기로운<br>병원생활</h3>
+                        </div>
+                    </a>
+                    <a href="https://blog.naver.com/dollark0wr" target="_blank" class="block group">
+                        <div class="h-48 flex items-center justify-center p-4 text-center bg-white rounded-lg shadow-lg transform group-hover:scale-105 transition-transform duration-300">
+                             <h3 class="text-xl font-bold text-[#073B4C]">J&YL<br>희토류가공업체</h3>
+                        </div>
+                    </a>
+                    <a href="https://blog.naver.com/lpkoreanstore" target="_blank" class="block group">
+                        <div class="h-48 flex items-center justify-center p-4 text-center bg-[#FFD166] rounded-lg shadow-lg transform group-hover:scale-105 transition-transform duration-300">
+                            <h3 class="text-xl font-bold text-[#073B4C]">LP 한인마트<br>(태국)</h3>
+                        </div>
+                    </a>
+                    <a href="https://blog.naver.com/ucomprise" target="_blank" class="block group">
+                        <div class="h-48 flex items-center justify-center p-4 text-center bg-[#FF6B6B] rounded-lg shadow-lg transform group-hover:scale-105 transition-transform duration-300">
+                            <h3 class="text-xl font-bold text-white">마플.<br>마이플레이스</h3>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="text-center my-12">
+            <h2 class="text-4xl font-black text-[#06D6A0]">기회는 단 5개 기업에게만 열려있습니다.</h2>
+            <p class="text-xl mt-4 text-gray-300">망설이는 순간, 경쟁사가 이 기회를 가져갑니다.<br>지금 바로 문의하고 성공적인 비즈니스의 첫걸음을 가장 빠르게 내딛으세요!</p>
+            <div class="mt-8">
+            <a href="tel:010-9135-3742">
+              <button class="bg-[#FFD166] text-[#073B4C] text-2xl font-bold px-12 py-4 rounded-full shadow-lg hover:bg-yellow-300 transition-all transform hover:scale-105">
+              전화상담
+              </button>
+            </a>
+                <p class="mt-4 text-lg text-gray-300">010 9135 3742 (서정민)</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+            
+            const wrapLabel = (label) => {
+                const maxLength = 8;
+                if (label.length <= maxLength) return label;
+                
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+
+                words.forEach(word => {
+                    if (currentLine.length === 0) {
+                        currentLine = word;
+                    } else if ((currentLine + ' ' + word).length > maxLength) {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine += ' ' + word;
+                    }
+                });
+                lines.push(currentLine);
+                return lines;
+            };
+
+            const chartFontColor = '#FFFFFF';
+            const gridColor = 'rgba(255, 255, 255, 0.2)';
+
+            const costChartCtx = document.getElementById('costChart').getContext('2d');
+            const costLabels = ['일반적인 홈페이지 제작 비용', '99홈페이지형 블로그'];
+            new Chart(costChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: costLabels.map(wrapLabel),
+                    datasets: [{
+                        label: '총 비용 (원)',
+                        data: [4000000, 990000],
+                        backgroundColor: ['#FF6B6B', '#06D6A0'],
+                        borderColor: ['#FF6B6B', '#06D6A0'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: chartFontColor,
+                                callback: function(value) {
+                                    return (value / 10000).toLocaleString() + '만 원';
+                                }
+                            },
+                            grid: { color: gridColor }
+                        },
+                        y: {
+                            ticks: { color: chartFontColor, font: { size: 14 } },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback,
+                                label: function(context) {
+                                    return context.raw.toLocaleString() + ' 원';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const growthChartCtx = document.getElementById('growthChart').getContext('2d');
+            new Chart(growthChartCtx, {
+                type: 'line',
+                data: {
+                    labels: ['1주차', '2주차', '4주차', '8주차', '12주차'],
+                    datasets: [{
+                        label: '신규 블로그 방문자 수',
+                        data: [10, 25, 40, 70, 120],
+                        borderColor: '#FF6B6B',
+                        backgroundColor: 'rgba(255, 107, 107, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: '육성 계정 제공 후 방문자 수',
+                        data: [300, 350, 450, 600, 800],
+                        borderColor: '#06D6A0',
+                        backgroundColor: 'rgba(6, 214, 160, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: chartFontColor, display: false },
+                            grid: { color: gridColor }
+                        },
+                        x: {
+                            ticks: { color: chartFontColor },
+                            grid: { color: gridColor }
+                        }
+                    },
+                    plugins: {
+                        legend: { labels: { color: chartFontColor } },
+                        tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
