@@ -33,6 +33,37 @@
             transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
+        /* Mobile adjustment for timeline */
+        @media (max-width: 767px) {
+            .md\:flex-row-reverse > .md\:pl-8 {
+                padding-left: 0;
+            }
+            .md\:flex-row-reverse > .md\:pl-8 .card {
+                 text-align: left;
+            }
+            .md\:justify-start > .md\:pr-8 {
+                padding-right: 0;
+            }
+            .md\:justify-start > .md\:pr-8 .card {
+                 text-align: left;
+            }
+            .timeline-item {
+                border-left: 2px solid #93c5fd;
+                padding-left: 1rem;
+                position: relative;
+            }
+            .timeline-item:before {
+                content: '';
+                position: absolute;
+                left: -10px;
+                top: 0;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: white;
+                border: 4px solid #3b82f6;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -183,7 +214,7 @@
                 <!-- Timeline Items -->
                 <div class="space-y-12">
                     <!-- Item 1 -->
-                    <div class="md:flex items-center md:justify-start">
+                    <div class="md:flex items-center md:justify-start timeline-item">
                         <div class="md:w-1/2 md:pr-8 text-right">
                             <div class="card">
                                 <h3 class="text-xl font-bold text-blue-600">STEP 1. 사전 콘텐츠 검수</h3>
@@ -195,9 +226,9 @@
                         </div>
                     </div>
                     <!-- Item 2 -->
-                     <div class="md:flex items-center md:flex-row-reverse">
+                     <div class="md:flex items-center md:flex-row-reverse timeline-item">
                         <div class="md:w-1/2 md:pl-8 text-left">
-                           <div class="card">
+                            <div class="card">
                                 <h3 class="text-xl font-bold text-teal-600">STEP 2. 예약 발행</h3>
                                 <p class="mt-2 text-gray-600">검수가 완료된 콘텐츠는 최적의 시간에 맞춰 예약 발행됩니다.</p>
                             </div>
@@ -207,7 +238,7 @@
                         </div>
                     </div>
                     <!-- Item 3 -->
-                    <div class="md:flex items-center md:justify-start">
+                    <div class="md:flex items-center md:justify-start timeline-item">
                         <div class="md:w-1/2 md:pr-8 text-right">
                             <div class="card">
                                 <h3 class="text-xl font-bold text-indigo-600">STEP 3. 주간 키워드 보고</h3>
@@ -219,7 +250,7 @@
                         </div>
                     </div>
                     <!-- Item 4 -->
-                    <div class="md:flex items-center md:flex-row-reverse">
+                    <div class="md:flex items-center md:flex-row-reverse timeline-item">
                         <div class="md:w-1/2 md:pl-8 text-left">
                             <div class="card">
                                 <h3 class="text-xl font-bold text-purple-600">STEP 4. 월간 육성 보고</h3>
@@ -266,12 +297,18 @@
                             <td class="p-4">99만원</td>
                             <td class="p-4">기본 육성과 노출</td>
                         </tr>
-                        <tr class="border-b">
-                            <td class="p-4 font-bold">Impact</td>
+                        <!-- 변경된 Impact 행: 배경색을 제거하고, 추천/특가 마크만 눈에 띄게 배치 -->
+                        <tr class="border-b bg-yellow-50/70 border-l-4 border-yellow-500 font-semibold">
+                            <td class="p-4 text-gray-900">
+                                Impact <span class="text-xs bg-yellow-400 text-gray-900 px-2 py-0.5 rounded-full ml-2 font-bold inline-block">추천</span> (지인 특가)
+                            </td>
                             <td class="p-4">12건</td>
                             <td class="p-4">매일</td>
-                            <td class="p-4">129만원</td>
-                            <td class="p-4">주요 키워드 노출</td>
+                            <td class="p-4">
+                                <span class="line-through text-gray-500 font-normal mr-2">149만원</span>
+                                <span class="text-xl font-extrabold text-red-600">129만원</span>
+                            </td>
+                            <td class="p-4">핵심 키워드 노출, 안정적인 성장</td>
                         </tr>
                         <tr class="bg-teal-50">
                             <td class="p-4 font-bold">Universe</td>
