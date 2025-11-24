@@ -7,6 +7,7 @@
     <style>
         :root {
             --primary: #5f0080; /* 차오름 상징색(보라) 계열 */
+            --point-red: #ff4d4d; /* 이미지의 붉은색 포인트 컬러 */
             --text-main: #333;
             --text-sub: #666;
             --bg-light: #f8f9fa;
@@ -18,7 +19,6 @@
             margin: 0;
             padding: 0;
         }
-        /* 컨테이너 너비를 넓혀 PC에서 4개가 한 줄에 들어갈 공간 확보 */
         .container {
             max-width: 1200px; 
             margin: 0 auto;
@@ -33,7 +33,7 @@
             font-size: 2.5rem;
             margin-bottom: 10px;
             color: #1a1a1a;
-            word-break: keep-all; /* 단어 단위 줄바꿈 */
+            word-break: keep-all;
         }
         .subtitle {
             font-size: 1.2rem;
@@ -50,23 +50,59 @@
             padding-bottom: 5px;
         }
         
-        /* 기본 카드 그리드 (보장내용, 무료서비스 등) - 3개 배치에 적합 */
+        /* 기본 카드 그리드 */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
 
+        /* 3단계 무료 서비스 섹션 디자인 (이미지 스타일 반영) */
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .step-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .step-number {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid var(--point-red);
+            color: var(--point-red);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: #fff;
+        }
+        .step-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: bold;
+        }
+        .step-card p {
+            font-size: 0.95rem;
+            color: #666;
+            word-break: keep-all;
+        }
+
         /* 가격표 전용 그리드 (PC 4열 / 모바일 1열) */
         .price-grid {
             display: grid;
             gap: 20px;
-            /* 모바일 기본: 1열 */
             grid-template-columns: 1fr; 
-            margin-bottom: 30px; /* 하단 박스와의 간격 추가 */
+            margin-bottom: 30px;
         }
-
-        /* PC 화면 (1024px 이상)에서만 4열로 강제 변경 */
         @media (min-width: 1024px) {
             .price-grid {
                 grid-template-columns: repeat(4, 1fr);
@@ -86,17 +122,17 @@
         }
         .price-card {
             background: white;
-            padding: 30px 20px; /* 좌우 패딩을 조금 줄여서 내용 확보 */
+            padding: 30px 20px;
             border-radius: 15px;
             border: 1px solid #eee;
             text-align: center;
             position: relative;
             transition: transform 0.3s ease;
-            display: flex;       /* 내용 정렬을 위해 flex 사용 */
+            display: flex;
             flex-direction: column;
             justify-content: space-between;
-            height: 100%;        /* 높이 통일 */
-            box-sizing: border-box; /* 패딩 포함 높이 계산 */
+            height: 100%;
+            box-sizing: border-box;
         }
         .price-card:hover {
             transform: translateY(-5px);
@@ -119,7 +155,7 @@
             white-space: nowrap;
         }
         .price {
-            font-size: 1.4rem; /* 폰트 사이즈 살짝 조정 */
+            font-size: 1.4rem;
             font-weight: bold;
             margin: 15px 0;
         }
@@ -127,7 +163,7 @@
             text-decoration: line-through;
             color: #999;
             font-size: 0.9rem;
-            display: block; /* 줄바꿈 */
+            display: block;
         }
         .price-card ul {
             list-style: none; 
@@ -206,21 +242,21 @@
         <div class="section-title">파트너 한정 3가지 무료 서비스</div>
         <p>함께 성장할 차오름 팬카페 운영진을 위해 3개월간 특별한 혜택을 제공합니다.</p>
 
-        <div class="card-grid">
-            <div class="card">
-                <span style="font-size:2rem; color:#ddd; font-weight:bold;">01</span>
-                <h3>1개월차: AI 최적화 계정 세팅</h3>
-                <p>최경호 대표의 AI 플랫폼 기술이 접목된 브랜드 블로그 초기 세팅 및 로직 최적화를 지원합니다.</p>
+        <div class="step-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>1개월차: 육성 계정 제공</h3>
+                <p>바로 노출이 시작할 수 있도록 준최적 4단계 아이디의 소유권을 이전해 드립니다.</p>
             </div>
-            <div class="card">
-                <span style="font-size:2rem; color:#ddd; font-weight:bold;">02</span>
-                <h3>2개월차: 탄생 스토리 브랜딩</h3>
-                <p>뇌공학자가 왜 트로트 팬덤 플랫폼을 만들었는지, 그 진솔한 이야기를 브랜드 스토리로 제작해 드립니다.</p>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>2개월차: 팬클럽스토리 작성</h3>
+                <p>대표님의 진솔한 이야기를 담아 <strong>팬클럽</strong> 블로그 공지로 등록해 드립니다.</p>
             </div>
-            <div class="card">
-                <span style="font-size:2rem; color:#ddd; font-weight:bold;">03</span>
-                <h3>3개월차: 플랫폼 연동형 디자인</h3>
-                <p>블로그에서 바로 QR 굿즈 구매와 동영상 플랫폼으로 연결되는 홈페이지형 디자인을 제공합니다.</p>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>3개월차: 홈페이지형 블로그 디자인 (링크 통합형)</h3>
+                <p><strong>팬클럽</strong> 이미지를 효과적으로 전달하는 디자인을 무료로 제공합니다.</p>
             </div>
         </div>
 
