@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>굿멘토를 위한 만다라트(Mandalart) 완벽 가이드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f8fafc; }
+        .mandal-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .sub-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background-color: #cbd5e1;
+            padding: 2px;
+            border-radius: 4px;
+        }
+        .cell {
+            aspect-ratio: 1 / 1;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 0.75rem;
+            padding: 4px;
+            word-break: keep-all;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .cell:hover { background-color: #f1f5f9; }
+        .cell-core { background-color: #3b82f6; color: white; font-weight: bold; }
+        .cell-sub { background-color: #e0f2fe; font-weight: 600; }
+        .active-cell { ring: 2px solid #3b82f6; z-index: 10; transform: scale(1.05); }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden">
+        <!-- Header -->
+        <div class="bg-blue-600 p-6 text-white text-center">
+            <h1 class="text-3xl font-bold mb-2">만다라트(Mandalart) 가이드</h1>
+            <p class="opacity-90">목표를 현실로 만드는 81칸의 마법</p>
+        </div>
+
+        <div class="p-6 space-y-8">
+            <!-- Section 1: Definition -->
+            <section>
+                <h2 class="text-xl font-bold border-l-4 border-blue-600 pl-3 mb-4">1. 만다라트란?</h2>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    만다라트(Mandalart)는 일본의 디자이너 이마이즈미 히로아키가 개발한 발상 기법입니다. '만다라(Mandala)'와 '아트(Art)'의 합성어로, 하나의 핵심 목표를 중심으로 아이디어를 사방으로 확장하여 총 <strong>81개의 칸</strong>을 채우는 계획표입니다. 일본의 야구 천재 <strong>오타니 쇼헤이</strong>가 고등학교 시절 사용한 것으로 매우 유명해졌습니다.
+                </p>
+            </section>
+
+            <!-- Section 2: How to write -->
+            <section>
+                <h2 class="text-xl font-bold border-l-4 border-blue-600 pl-3 mb-4">2. 작성 단계 (Step-by-Step)</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500 border-collapse">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-3 border">단계</th>
+                                <th class="px-4 py-3 border">내용</th>
+                                <th class="px-4 py-3 border">설명</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b">
+                                <td class="px-4 py-3 border font-bold text-blue-600">STEP 01</td>
+                                <td class="px-4 py-3 border font-semibold">핵심 목표 설정</td>
+                                <td class="px-4 py-3 border">정중앙 1칸에 가장 달성하고 싶은 최종 목표를 적습니다.</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="px-4 py-3 border font-bold text-blue-600">STEP 02</td>
+                                <td class="px-4 py-3 border font-semibold">세부 과제 도출</td>
+                                <td class="px-4 py-3 border">중앙 목표를 둘러싼 8칸에 핵심 목표를 이루기 위한 8가지 영역을 적습니다.</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="px-4 py-3 border font-bold text-blue-600">STEP 03</td>
+                                <td class="px-4 py-3 border font-semibold">아이디어 확장</td>
+                                <td class="px-4 py-3 border">주변부 8개 그리드의 중앙에 앞서 적은 8가지 세부 과제를 각각 옮겨 적습니다.</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="px-4 py-3 border font-bold text-blue-600">STEP 04</td>
+                                <td class="px-4 py-3 border font-semibold">실행 계획 구체화</td>
+                                <td class="px-4 py-3 border">확장된 8개 그리드의 나머지 빈칸(각 8칸씩 총 64칸)에 구체적인 액션 플랜을 채웁니다.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 3: Checklist -->
+            <section class="bg-blue-50 p-5 rounded-lg">
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <span class="mr-2">✅</span> 작성 시 체크리스트
+                </h2>
+                <ul class="space-y-2 text-gray-700">
+                    <li class="flex items-start">
+                        <input type="checkbox" class="mt-1 mr-2" checked disabled>
+                        <span><strong>구체성:</strong> '운동하기'보다는 '주 3회 조깅하기'처럼 구체적으로 적었는가?</span>
+                    </li>
+                    <li class="flex items-start">
+                        <input type="checkbox" class="mt-1 mr-2" checked disabled>
+                        <span><strong>측정 가능성:</strong> 목표 달성 여부를 숫자로 확인할 수 있는가?</span>
+                    </li>
+                    <li class="flex items-start">
+                        <input type="checkbox" class="mt-1 mr-2" checked disabled>
+                        <span><strong>논리성:</strong> 하위 계획들이 상위 목표와 직접적으로 연관되는가?</span>
+                    </li>
+                    <li class="flex items-start">
+                        <input type="checkbox" class="mt-1 mr-2" checked disabled>
+                        <span><strong>실행력:</strong> 지금 당장 시작할 수 있는 사소한 습관이 포함되어 있는가?</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Section 4: Interactive Tool -->
+            <section>
+                <h2 class="text-xl font-bold border-l-4 border-blue-600 pl-3 mb-6">3. 만다라트 템플릿 (미리보기)</h2>
+                <p class="text-sm text-gray-500 mb-4">* 중앙의 파란색 칸이 핵심 목표, 주변 하늘색 칸이 세부 과제입니다.</p>
+                
+                <div class="mandal-grid" id="mandalart">
+                    <!-- Javascript will generate cells here -->
+                </div>
+            </section>
+        </div>
+        
+        <div class="bg-gray-100 p-4 text-center text-gray-500 text-xs">
+            © 2025 Mandalart Guide | 시각화된 계획으로 성장을 시작하세요.
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('mandalart');
+        
+        // Mock data structure
+        const structure = Array(9).fill(null).map(() => Array(9).fill(""));
+        
+        // Populate specific placeholders for visual understanding
+        structure[4][4] = "핵심 목표"; // Main Core
+        const subIndex = [0,1,2,3,5,6,7,8];
+        const subTitles = ["건강", "기술", "인성", "운", "인간관계", "멘탈", "자기계발", "재정"];
+        
+        subIndex.forEach((idx, i) => {
+            structure[4][idx] = subTitles[i]; // Core's surrounding
+            structure[idx][4] = subTitles[i]; // Sub-grids' centers
+        });
+
+        function render() {
+            container.innerHTML = '';
+            for (let i = 0; i < 9; i++) {
+                const subGrid = document.createElement('div');
+                subGrid.className = 'sub-grid';
+                
+                for (let j = 0; j < 9; j++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    
+                    // Style logic
+                    if (i === 4 && j === 4) cell.classList.add('cell-core');
+                    else if (i === 4 || j === 4) {
+                        // All center cells of all grids OR all cells of the center grid
+                        if (i === 4 || (j === 4)) cell.classList.add('cell-sub');
+                    }
+
+                    cell.innerText = structure[i][j];
+                    subGrid.appendChild(cell);
+                }
+                container.appendChild(subGrid);
+            }
+        }
+
+        render();
+    </script>
+</body>
+</html>
