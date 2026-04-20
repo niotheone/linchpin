@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SparkleTV | Neural Highway: 인공지능 연금 수익 구조</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Chosen Palette: Warm Neutrals & Crimson Accent -->
+    <!-- Application Structure Plan: The SPA is structured as an interactive executive dashboard. It begins with the core value proposition (AI Pension), moving immediately into an interactive 'Revenue Simulator' to hook the user by letting them play with the referral multiplier. It then breaks down the underlying math (Revenue Split & Slot Economy) to build trust. Subsequent sections detail the strategic 'how' (Advertiser Mix, Competitor Advantage, Workflow) to solidify the business case. This flow guides the user from 'What is the benefit?' to 'How is it possible?' and finally 'Why is it superior?', prioritizing active exploration over linear reading. -->
+    <!-- Visualization & Content Choices: 
+         1. Intro: Core Message -> Text/Stats -> Inform users of the main premise.
+         2. Referral Simulation: Revenue Scaling -> Mixed Chart (Bar + Dashed Line) -> Show cumulative potential. Justification: Dashed line provides a clear trajectory of how cumulative bonuses scale.
+         3. Revenue Split: Math Breakdown -> Doughnut Chart (Chart.js) -> Show the 30/70 split. 
+         4. Advertiser Tiers & Competitors: Market Strategy -> Tailwind Grids & Tables -> Organize complex qualitative data.
+         Library/Method: Chart.js for all dynamic visuals. Tailwind for layout. Vanilla JS for state/updates. Unicode icons used exclusively.
+         Confirming: NO SVG, NO Mermaid JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #FAFAFA; /* 연한 웜 뉴트럴 배경 */
+            color: #1F2937;
+        }
+        
+        /* 차트 컨테이너 스타일링 */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+            overflow: hidden;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* 슬라이더 스타일링 */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #E11D48;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #E5E7EB;
+            border-radius: 4px;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        .interactive-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .interactive-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen pb-20">
+
+    <!-- 헤더 내비게이션 -->
+    <nav class="bg-white sticky top-0 z-50 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <span class="text-2xl font-black text-rose-600">✨ SparkleTV</span>
+                    <span class="hidden md:inline-block text-sm text-gray-500 font-medium">| Neural Highway</span>
+                </div>
+                <div class="hidden sm:flex space-x-8 text-sm font-bold">
+                    <a href="#simulator" class="text-gray-700 hover:text-rose-600 px-3 py-2">수익 시뮬레이터</a>
+                    <a href="#model" class="text-gray-700 hover:text-rose-600 px-3 py-2">비즈니스 모델</a>
+                    <a href="#market" class="text-gray-700 hover:text-rose-600 px-3 py-2">시장 분석</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-16">
+
+        <!-- 섹션 1: 히어로 -->
+        <section class="text-center space-y-6 py-12">
+            <h1 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight">
+                오프라인의 구글 애드센스, <br class="hidden md:block"/>
+                <span class="text-rose-600">인공지능 연금</span>을 시작하세요.
+            </h1>
+            <p class="max-w-2xl mx-auto text-lg text-gray-600 leading-relaxed">
+                매장 내 유휴 TV를 디지털 광고 매체로 전환하여 안정적인 광고 수익을 배분받으세요. 
+                설치비 0원, 내 가게 홍보는 평생 공짜입니다.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 pt-4">
+                <div class="glass-card rounded-xl p-4 w-40">
+                    <div class="text-3xl mb-2">💸</div>
+                    <div class="font-bold text-gray-900">비용 0원</div>
+                    <div class="text-xs text-gray-500">설치/유지비 전액 무료</div>
+                </div>
+                <div class="glass-card rounded-xl p-4 w-40 border-rose-200 border-2">
+                    <div class="text-3xl mb-2">🔒</div>
+                    <div class="font-bold text-gray-900">500대 한정</div>
+                    <div class="text-xs text-rose-500 font-bold">지역구 선착순 마감</div>
+                </div>
+                <div class="glass-card rounded-xl p-4 w-40">
+                    <div class="text-3xl mb-2">🤖</div>
+                    <div class="font-bold text-gray-900">AI 자동화</div>
+                    <div class="text-xs text-gray-500">24시간 광고 무인 운영</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 섹션 2: 인터랙티브 수익 시뮬레이터 -->
+        <section id="simulator" class="scroll-mt-20">
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold text-gray-900 border-l-4 border-rose-600 pl-3">내 인공지능 연금 시뮬레이터</h2>
+                <p class="text-gray-600 mt-2">
+                    슬라이더를 움직여 소개 매장 수에 따른 수익 변화를 확인하세요. **빨간색 점선**은 소개가 늘어날수록 평생 받게 될 수익의 가상 성장 궤적입니다.
+                </p>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 md:p-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <!-- 컨트롤 영역 -->
+                <div class="space-y-8">
+                    <div>
+                        <label for="referralSlider" class="block text-lg font-bold text-gray-800 mb-4">
+                            소개한 주변 매장 수: <span id="sliderValue" class="text-rose-600 text-3xl ml-2">0</span>곳
+                        </label>
+                        <input type="range" id="referralSlider" min="0" max="10" value="0" step="1">
+                        <div class="flex justify-between text-xs text-gray-400 mt-2 font-medium">
+                            <span>0곳 (기본)</span>
+                            <span>5곳</span>
+                            <span>10곳 (최대)</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-rose-50 rounded-xl p-6 border border-rose-100">
+                        <div class="text-sm text-rose-800 font-bold mb-1">월 최종 예상 순수익</div>
+                        <div class="text-4xl md:text-5xl font-black text-rose-600 tracking-tight" id="totalRevenueText">
+                            225만 원
+                        </div>
+                        <div class="mt-4 space-y-2 text-sm text-gray-700">
+                            <div class="flex justify-between border-b border-rose-200 pb-1">
+                                <span>내 매장 기본 배분 (30%)</span>
+                                <span class="font-bold">225만 원</span>
+                            </div>
+                            <div class="flex justify-between pb-1">
+                                <span>소개 매장 보너스 (10% 누적)</span>
+                                <span class="font-bold text-rose-600" id="bonusRevenueText">+ 0만 원</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 차트 영역 -->
+                <div>
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <p class="text-center text-xs text-gray-400 mt-4 italic font-medium">
+                        * 1개 매장 100% 충전(광고주 150명) 기준의 가상 성장 궤적입니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 섹션 3: 수익 구조 상세 -->
+        <section id="model" class="scroll-mt-20">
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold text-gray-900 border-l-4 border-rose-600 pl-3">수익 구조의 핵심: 슬롯과 배분</h2>
+                <p class="text-gray-600 mt-2">
+                    SparkleTV의 경제 모델은 명확합니다. 광고 노출 단위를 '슬롯'으로 관리하며, 매출은 매장주와 플랫폼이 투명하게 공유합니다.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 슬롯 계산 -->
+                <div class="glass-card rounded-2xl p-6 md:p-8 flex flex-col justify-center">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">📺 매장 운영 수치</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-sm text-gray-500 font-medium">월 총 공급 슬롯</div>
+                                <div class="text-2xl font-black text-gray-800">30,000 개</div>
+                            </div>
+                            <div class="text-4xl text-gray-300">/</div>
+                            <div class="text-right">
+                                <div class="text-sm text-gray-500 font-medium">1인당 구매 슬롯</div>
+                                <div class="text-2xl font-black text-gray-800">200 개</div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-100 rounded-lg p-4 text-center">
+                            <div class="text-sm text-gray-600 font-medium mb-1">매장 100% 충전 필요 광고주</div>
+                            <div class="text-3xl font-black text-rose-600">150 명</div>
+                        </div>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li class="flex items-start gap-2">
+                                <span class="text-rose-500">✓</span>
+                                <span>광고주 1인 월 요금: <strong>50,000원</strong> (최저가 타겟팅)</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-rose-500">✓</span>
+                                <span>월 총 광고 매출 기대치: <strong>7,500,000원</strong></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 매출 배분 차트 -->
+                <div class="glass-card rounded-2xl p-6 md:p-8">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">📊 투명한 배분 구조</h3>
+                    <p class="text-sm text-gray-500 mb-4">창출되는 총 매출(750만원) 분배 방식</p>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="splitChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 섹션 4: 광고주 믹스 전략 -->
+        <section>
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold text-gray-900 border-l-4 border-rose-600 pl-3">하이브리드 광고주 믹스 전략</h2>
+                <p class="text-gray-600 mt-2">
+                    단순 소상공인만으로는 부족합니다. 세 가지 계층의 광고주를 전략적으로 유치하여 슬롯을 상시 100% 충전합니다.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card interactive-card rounded-xl p-6 cursor-pointer" onclick="toggleDetails('tier1-details')">
+                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-2xl mb-4">🏪</div>
+                    <h3 class="text-lg font-bold text-gray-900">TIER 1. 로컬 상생</h3>
+                    <p class="text-sm text-gray-500 mt-1">주변 식당, 세탁소 등 소상공인</p>
+                    <div id="tier1-details" class="mt-4 text-sm text-gray-600 hidden border-t border-gray-100 pt-3">
+                        <ul class="space-y-1 list-disc pl-4">
+                            <li>월 5만원 저가형 과금 기반 수량 확보</li>
+                            <li>지역 상권 내 상호 품앗이 네트워크 형성</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="glass-card interactive-card rounded-xl p-6 cursor-pointer border-t-4 border-rose-500" onclick="toggleDetails('tier2-details')">
+                    <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center text-2xl mb-4">🩺</div>
+                    <h3 class="text-lg font-bold text-gray-900">TIER 2. 전환형 (핵심)</h3>
+                    <p class="text-sm text-gray-500 mt-1">병원, 학원 등 전문직 광고주</p>
+                    <div id="tier2-details" class="mt-4 text-sm text-gray-600 border-t border-gray-100 pt-3">
+                        <ul class="space-y-1 list-disc pl-4">
+                            <li>CPA (전화/예약 전환당 과금) 도입</li>
+                            <li>안정적이고 높은 단가의 수익 창출원</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="glass-card interactive-card rounded-xl p-6 cursor-pointer" onclick="toggleDetails('tier3-details')">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-2xl mb-4">🏢</div>
+                    <h3 class="text-lg font-bold text-gray-900">TIER 3. 대형 브랜드</h3>
+                    <p class="text-sm text-gray-500 mt-1">전국 단위 기업 캠페인</p>
+                    <div id="tier3-details" class="mt-4 text-sm text-gray-600 hidden border-t border-gray-100 pt-3">
+                        <ul class="space-y-1 list-disc pl-4">
+                            <li>CPM 기반 전국 수만 대 일괄 송출</li>
+                            <li>잔여 슬롯을 채우는 프리미엄 광고주</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 섹션 5: 경쟁력 비교 -->
+        <section id="market" class="scroll-mt-20">
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold text-gray-900 border-l-4 border-rose-600 pl-3">글로벌 경쟁 우위</h2>
+                <p class="text-gray-600 mt-2">
+                    SparkleTV는 단순 광고 송출기가 아닙니다. 투명한 배분과 강력한 소개 리워드로 세계 유일의 소상공인 자산형 수익 시스템을 구축했습니다.
+                </p>
+            </div>
+            <div class="glass-card rounded-2xl overflow-hidden overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 border-b border-gray-200">
+                            <th class="p-4 font-bold text-gray-700">비교 항목</th>
+                            <th class="p-4 font-bold text-rose-600 bg-rose-50">✨ SparkleTV</th>
+                            <th class="p-4 font-bold text-gray-600">MUSTAD (국내)</th>
+                            <th class="p-4 font-bold text-gray-600">Loop TV (미국)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 text-sm">
+                        <tr>
+                            <td class="p-4 font-medium text-gray-900">수익 배분 공개</td>
+                            <td class="p-4 bg-rose-50/50 font-bold text-rose-600">30% (투명)</td>
+                            <td class="p-4 text-gray-600">불투명</td>
+                            <td class="p-4 text-gray-600">불투명(파산)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium text-gray-900">소개 리워드</td>
+                            <td class="p-4 bg-rose-50/50 font-bold text-rose-600">10% 평생</td>
+                            <td class="p-4 text-gray-600">-</td>
+                            <td class="p-4 text-gray-600">-</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium text-gray-900">진입 비용</td>
+                            <td class="p-4 bg-rose-50/50 font-bold">0원</td>
+                            <td class="p-4 text-gray-600">SaaS 요금</td>
+                            <td class="p-4 text-gray-600">0원</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 푸터 -->
+        <footer class="text-center py-12 border-t border-gray-200 mt-12">
+            <h2 class="text-2xl font-black text-gray-900 mb-4">501번째는 없습니다.</h2>
+            <p class="text-gray-600 mb-8 max-w-xl mx-auto">지역구 선점을 통해 평생 지속되는 인공지능 연금을 확보하세요.</p>
+            <button class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg transform transition hover:scale-105" onclick="alert('가입 신청 폼이 열립니다.')">
+                지금 서명하여 내 자리 확보하기
+            </button>
+            <p class="mt-6 text-sm text-gray-400">SparkleTV | Neural Highway Al Advertising</p>
+        </footer>
+
+    </main>
+
+    <!-- 인터랙티브 로직 -->
+    <script>
+        const BASE_REVENUE = 225; 
+        const BONUS_STEP = 75; 
+        
+        let revenueChartInstance = null;
+        let splitChartInstance = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initRevenueChart();
+            initSplitChart();
+            setupSliderListener();
+            updateDashboard(0);
+        });
+
+        function setupSliderListener() {
+            const slider = document.getElementById('referralSlider');
+            slider.addEventListener('input', (e) => {
+                const val = parseInt(e.target.value, 10);
+                updateDashboard(val);
+            });
+        }
+
+        function updateDashboard(referrals) {
+            const bonus = referrals * BONUS_STEP;
+            const total = BASE_REVENUE + bonus;
+
+            document.getElementById('sliderValue').textContent = referrals;
+            document.getElementById('bonusRevenueText').textContent = `+ ${bonus}만 원`;
+            document.getElementById('totalRevenueText').textContent = `${total}만 원`;
+
+            if(revenueChartInstance) {
+                // 특정 지점 하이라이트를 위해 막대 색상 동적 변경
+                const bgBase = Array(11).fill('rgba(31, 41, 55, 0.1)');
+                const bgBonus = Array(11).fill('rgba(225, 29, 72, 0.1)');
+                
+                bgBase[referrals] = 'rgba(31, 41, 55, 1)';
+                bgBonus[referrals] = 'rgba(225, 29, 72, 1)';
+
+                revenueChartInstance.data.datasets[0].backgroundColor = bgBase;
+                revenueChartInstance.data.datasets[1].backgroundColor = bgBonus;
+                revenueChartInstance.update('none');
+            }
+        }
+
+        function initRevenueChart() {
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            
+            // 0곳 ~ 10곳 라벨
+            const labels = Array.from({length: 11}, (_, i) => i + '곳');
+            
+            // 가상 성장 곡선 데이터 (점선용)
+            const trendData = labels.map((_, i) => BASE_REVENUE + (i * BONUS_STEP));
+            const baseData = Array(11).fill(BASE_REVENUE);
+            const bonusData = labels.map((_, i) => i * BONUS_STEP);
+
+            revenueChartInstance = new Chart(ctx, {
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            type: 'bar',
+                            label: '기본 수익 (30%)',
+                            data: baseData,
+                            backgroundColor: 'rgba(31, 41, 55, 0.2)',
+                            stack: 'Stack 0',
+                            order: 2,
+                            borderRadius: 4
+                        },
+                        {
+                            type: 'bar',
+                            label: '소개 보너스 (10%)',
+                            data: bonusData,
+                            backgroundColor: 'rgba(225, 29, 72, 0.2)',
+                            stack: 'Stack 0',
+                            order: 2,
+                            borderRadius: 4
+                        },
+                        {
+                            type: 'line',
+                            label: '수익 성장 곡선 (점선)',
+                            data: trendData,
+                            borderColor: '#E11D48',
+                            borderWidth: 2,
+                            borderDash: [5, 5], // 점선 스타일
+                            pointRadius: 4,
+                            pointBackgroundColor: '#E11D48',
+                            fill: false,
+                            order: 1,
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { stacked: true, grid: { display: false } },
+                        y: { 
+                            stacked: true, 
+                            beginAtZero: true, 
+                            max: 1000,
+                            grid: { color: '#F3F4F6' },
+                            ticks: { callback: (val) => val + '만' }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y}만 원`
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function initSplitChart() {
+            const ctx = document.getElementById('splitChart').getContext('2d');
+            splitChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['매장주 (30%)', '플랫폼 (70%)'],
+                    datasets: [{
+                        data: [30, 70],
+                        backgroundColor: ['#E11D48', '#F3F4F6'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '75%',
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+        }
+
+        function toggleDetails(id) {
+            const el = document.getElementById(id);
+            const isHidden = el.classList.contains('hidden');
+            
+            // 모든 상세 정보 닫기
+            ['tier1-details', 'tier2-details', 'tier3-details'].forEach(tid => {
+                document.getElementById(tid).classList.add('hidden');
+                document.getElementById(tid).parentElement.classList.remove('border-t-4', 'border-rose-500');
+            });
+
+            if (isHidden) {
+                el.classList.remove('hidden');
+                el.parentElement.classList.add('border-t-4', 'border-rose-500');
+            }
+        }
+    </script>
+</body>
+</html>
